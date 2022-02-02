@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <title><%= title%></title>
+</head>
+<body>
+
+  <div class="container">
+    <% if (created) {%>
+      <p class="alert alert-success">Note was been created!</p>
+    <%}%>
+
+    <h1 class="title"><%= title%></h1>
+
+    <form action="/" method="post" class="form mb-2">
+      <div class="form-group mb-2">
+        <input type="text" name="title" class="form-control" required>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Create note</button>
+    </form>
+
+    <% if (notes.length) { %>
+      <div class="card">
+        <ul class="list-group">
+          <% for (let i = 0; i < notes.length; i++) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <p class="m-0 note-text"><%= notes[i].title%></p>
+            <div>
+              <button class="btn btn-primary" type="button" data-type="edit" data-id="<%=notes[i].id%>">Редактировать</button>
+              <button class="btn btn-danger" type="button" data-type="remove" data-id="<%=notes[i].id%>">&times</button>
+            </div>
+          </li>
+          <% } %>
+        </ul>
+      </div>
+     <%} else { %>
+      <p>No  notes!</p>
+     <%}%> 
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
